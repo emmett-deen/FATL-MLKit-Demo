@@ -6,6 +6,7 @@ import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 class HomeController extends GetxController {
   Rx<CameraController?> camController = Rx<CameraController?>(null);
   RxList<Pose> poses = RxList<Pose>([]);
+  Rx<Size> absoluteImageSize = Rx<Size>(const Size(0, 0));
 
   @override
   void onInit() async {
@@ -53,6 +54,8 @@ class HomeController extends GetxController {
   InputImage _createInputImageFromCameraImage(CameraImage cameraImage) {
     final Size imageSize =
         Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
+
+    absoluteImageSize.value = imageSize;
 
     final InputImageRotation? imageRotation =
         InputImageRotationValue.fromRawValue(0);
