@@ -7,6 +7,7 @@ class HomeController extends GetxController {
   Rx<CameraController?> camController = Rx<CameraController?>(null);
   RxList<Pose> poses = RxList<Pose>([]);
   Rx<Size> absoluteImageSize = Rx<Size>(const Size(0, 0));
+  
 
   @override
   void onInit() async {
@@ -46,7 +47,7 @@ class HomeController extends GetxController {
       final newPoses = await poseDetector
           .processImage(_createInputImageFromCameraImage(image));
 
-      // Do something with the poses
+      // Assign RxList to the new poses
       poses.value = newPoses;
     });
   }

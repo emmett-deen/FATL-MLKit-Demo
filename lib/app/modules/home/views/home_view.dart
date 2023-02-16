@@ -16,16 +16,19 @@ class HomeView extends GetView<HomeController> {
           title: const Text('HomeView'),
           centerTitle: true,
         ),
-        body: Obx(() => controller.camController.value != null
-            ? CustomPaint(
-                painter: PosePainter(
-                    controller.poses,
-                    controller.absoluteImageSize.value,
-                    InputImageRotationValue.fromRawValue(0)!),
-                child: CameraPreview(controller.camController.value!),
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              )));
+        body: Obx(() {
+          return controller.camController.value != null
+              ? CustomPaint(
+                key: Key(controller.poses.toString()),
+                  foregroundPainter: PosePainter(
+                      controller.poses,
+                      controller.absoluteImageSize.value,
+                      InputImageRotationValue.fromRawValue(0)!),
+                  child: CameraPreview(controller.camController.value!),
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                );
+        }));
   }
 }
